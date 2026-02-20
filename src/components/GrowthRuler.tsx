@@ -13,7 +13,7 @@ function HeightDial({ value, onChange }: { value: number; onChange: (v: number) 
   const pct = ((value - MIN_CM) / (MAX_CM - MIN_CM)) * 100;
 
   return (
-    <div className="bg-card rounded-3xl shadow-card p-4 flex flex-col gap-3">
+    <div className="bg-card rounded-3xl shadow-card p-4 flex flex-col gap-3 flex-1 min-w-0">
       <div className="flex items-center gap-2">
         <div className="w-8 h-8 rounded-xl bg-mint/40 flex items-center justify-center">
           <Ruler size={16} className="text-primary" />
@@ -65,7 +65,7 @@ function WeightDial({ value, onChange }: { value: number; onChange: (v: number) 
   const pct = ((value - MIN_KG) / (MAX_KG - MIN_KG)) * 100;
 
   return (
-    <div className="bg-card rounded-3xl shadow-card p-4 flex flex-col gap-3">
+    <div className="bg-card rounded-3xl shadow-card p-4 flex flex-col gap-3 flex-1 min-w-0">
       <div className="flex items-center gap-2">
         <div className="w-8 h-8 rounded-xl bg-peach/40 flex items-center justify-center">
           <Weight size={16} className="text-accent" />
@@ -124,7 +124,7 @@ export default function GrowthRuler() {
   const diaper = diaperInfo(peso);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 w-full overflow-hidden">
       <div className="flex gap-4">
         {/* Height widget */}
         <HeightDial value={altezza} onChange={setAltezza} />
