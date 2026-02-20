@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DiaperCTA from "@/components/DiperCTA";
 import GrowthRuler from "@/components/GrowthRuler";
+import IOSHeader from "@/components/IOSHeader";
 import { Plus, TrendingUp, Baby } from "lucide-react";
 
 interface Entry {
@@ -46,14 +47,11 @@ export default function CrescitaTab() {
 
   return (
     <div className="flex flex-col gap-0 pb-2">
-      {/* Header */}
-      <div className="px-5 pt-14 pb-5 gradient-hero">
-        <h1 className="font-heading text-2xl font-extrabold text-foreground">📏 Crescita</h1>
-        <p className="text-muted-foreground text-sm font-body mt-1">Traccia peso e altezza del tuo bambino</p>
-      </div>
+      {/* iOS Large Title Header */}
+      <IOSHeader title="Crescita 📏" subtitle="Peso e altezza del tuo bambino" transparent />
 
       {/* Growth Ruler */}
-      <div className="px-4 -mt-2 mb-4">
+      <div className="px-4 mb-4">
         <GrowthRuler />
       </div>
 

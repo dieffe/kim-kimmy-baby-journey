@@ -16,9 +16,9 @@ const tabs = [
 
 export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   return (
-    <div className="fixed bottom-0 left-0 right-0 safe-bottom z-50">
-      <div className="glass border-t border-border mx-0">
-        <div className="flex items-center justify-around px-2 pt-2 pb-6">
+    <div className="z-50">
+      <div className="glass border-t border-border">
+        <div className="flex items-center justify-around px-2 pt-2 pb-2">
           {tabs.map(({ id, label, icon: Icon }) => {
             const isActive = activeTab === id;
             return (
