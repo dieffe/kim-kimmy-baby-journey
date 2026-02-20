@@ -1,34 +1,34 @@
 import heroBaby from "@/assets/hero-baby.jpg";
 import DiaperCTA from "@/components/DiperCTA";
-import { Star, Shield, Leaf, Droplets } from "lucide-react";
+import IOSHeader from "@/components/IOSHeader";
+import { Star, Shield, Leaf, Droplets, Bell } from "lucide-react";
 
 export default function HomeTab() {
   return (
     <div className="flex flex-col gap-0 pb-2">
-      {/* Header */}
-      <div className="px-5 pt-14 pb-4 gradient-hero">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <p className="text-muted-foreground text-sm font-body">Benvenuta 👋</p>
-            <h1 className="font-heading text-2xl font-extrabold text-foreground leading-tight">
-              Kim & Kimmy
-            </h1>
-          </div>
-          <div className="w-11 h-11 rounded-2xl bg-primary/10 flex items-center justify-center">
-            <span className="font-heading font-bold text-primary text-lg">K</span>
-          </div>
-        </div>
+      {/* iOS Large Title Header */}
+      <div className="gradient-hero px-0 pb-4">
+        <IOSHeader
+          title="Kim & Kimmy"
+          subtitle="Benvenuta 👋"
+          transparent
+          rightAction={
+            <button className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
+              <Bell size={18} className="text-primary" />
+            </button>
+          }
+        />
 
         {/* Hero Image */}
-        <div className="relative rounded-3xl overflow-hidden shadow-soft">
+        <div className="mx-4 relative rounded-3xl overflow-hidden shadow-soft">
           <img
             src={heroBaby}
             alt="Baby con pannolino Kim & Kimmy"
-            className="w-full h-52 object-cover"
+            className="w-full h-48 object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 to-transparent flex flex-col justify-end p-5">
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 to-transparent flex flex-col justify-end p-4">
             <p className="text-primary-foreground/90 text-xs font-body uppercase tracking-widest">Il marchio per</p>
-            <h2 className="text-primary-foreground font-heading font-extrabold text-xl leading-tight">
+            <h2 className="text-primary-foreground font-heading font-extrabold text-lg leading-tight">
               Crescere bambini felici e sani
             </h2>
           </div>
@@ -39,7 +39,7 @@ export default function HomeTab() {
       <div className="px-4 py-4">
         <div className="grid grid-cols-3 gap-3">
           {[
-            { icon: Shield, label: "Ipoallergenico", color: "bg-mint/30 text-mint" },
+            { icon: Shield, label: "Ipoallergenico", color: "bg-mint/30 text-primary" },
             { icon: Leaf, label: "Ecologico", color: "bg-secondary text-primary" },
             { icon: Droplets, label: "Ultra assorbente", color: "bg-peach/30 text-accent" },
           ].map(({ icon: Icon, label, color }) => (
@@ -58,7 +58,7 @@ export default function HomeTab() {
         <div className="bg-card rounded-2xl p-4 shadow-card">
           <div className="flex items-center gap-1 mb-1">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} size={14} fill="hsl(38 90% 58%)" className="text-yellow-400" />
+              <Star key={i} size={14} className="text-yellow-400 fill-yellow-400" />
             ))}
             <span className="text-xs text-muted-foreground font-body ml-1">49 recensioni</span>
           </div>

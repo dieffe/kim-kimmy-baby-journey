@@ -1,4 +1,5 @@
 import DiaperCTA from "@/components/DiperCTA";
+import IOSHeader from "@/components/IOSHeader";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
@@ -70,13 +71,10 @@ function TipGroup({ group }: { group: (typeof ageGroups)[0] }) {
 export default function ConsigliaTab() {
   return (
     <div className="flex flex-col gap-0 pb-2">
-      {/* Header */}
-      <div className="px-5 pt-14 pb-5 gradient-hero">
-        <h1 className="font-heading text-2xl font-extrabold text-foreground">💡 Consigli</h1>
-        <p className="text-muted-foreground text-sm font-body mt-1">Consigli pratici per ogni fase della crescita</p>
-      </div>
+      {/* iOS Large Title Header */}
+      <IOSHeader title="Consigli 💡" subtitle="Per ogni fase della crescita" />
 
-      <div className="px-4 py-4 flex flex-col gap-3">
+      <div className="px-4 py-3 flex flex-col gap-3">
         {ageGroups.map((group) => (
           <TipGroup key={group.range} group={group} />
         ))}

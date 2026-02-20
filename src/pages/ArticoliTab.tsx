@@ -1,4 +1,5 @@
 import DiaperCTA from "@/components/DiperCTA";
+import IOSHeader from "@/components/IOSHeader";
 import { Clock, ArrowRight } from "lucide-react";
 
 const articles = [
@@ -52,14 +53,11 @@ const articles = [
 export default function ArticoliTab() {
   return (
     <div className="flex flex-col gap-0 pb-2">
-      {/* Header */}
-      <div className="px-5 pt-14 pb-5 gradient-hero">
-        <h1 className="font-heading text-2xl font-extrabold text-foreground">📰 Articoli</h1>
-        <p className="text-muted-foreground text-sm font-body mt-1">Guide e risorse per genitori consapevoli</p>
-      </div>
+      {/* iOS Large Title Header */}
+      <IOSHeader title="Articoli 📰" subtitle="Guide per genitori consapevoli" />
 
       {/* Featured article */}
-      <div className="px-4 py-4">
+      <div className="px-4 py-3">
         <div className="bg-card rounded-3xl shadow-card overflow-hidden">
           <div className={`${articles[0].color} px-5 py-6`}>
             <span className="text-4xl">{articles[0].emoji}</span>
