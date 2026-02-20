@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DiaperCTA from "@/components/DiperCTA";
-import growthIllustration from "@/assets/growth-illustration.png";
+import GrowthRuler from "@/components/GrowthRuler";
 import { Plus, TrendingUp, Baby } from "lucide-react";
 
 interface Entry {
@@ -52,8 +52,13 @@ export default function CrescitaTab() {
         <p className="text-muted-foreground text-sm font-body mt-1">Traccia peso e altezza del tuo bambino</p>
       </div>
 
-      {/* Current stats */}
+      {/* Growth Ruler */}
       <div className="px-4 -mt-2 mb-4">
+        <GrowthRuler />
+      </div>
+
+      {/* Current stats */}
+      <div className="px-4 mb-4">
         <div className="bg-card rounded-3xl shadow-card p-5">
           <div className="flex items-center gap-3 mb-4">
             <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center">
