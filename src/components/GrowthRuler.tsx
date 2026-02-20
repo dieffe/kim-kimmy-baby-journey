@@ -126,35 +126,31 @@ export default function GrowthRuler() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
-        {/* Ruler section */}
+        {/* Height widget */}
         <HeightDial value={altezza} onChange={setAltezza} />
 
-        {/* Right col: weight + diaper */}
-        <div className="flex flex-col gap-3 flex-1">
-          <WeightDial value={peso} onChange={setPeso} />
+        {/* Weight widget */}
+        <WeightDial value={peso} onChange={setPeso} />
+      </div>
 
-          {/* Diaper suggestion */}
-          <div className="bg-card rounded-3xl shadow-card p-4 flex flex-col items-center gap-2">
-            <div className="w-14 h-14 rounded-2xl bg-peach/30 flex items-center justify-center text-3xl">
-              {diaper.emoji}
-            </div>
-            <div className="text-center">
-              <p className="font-heading font-bold text-foreground text-base leading-tight">{diaper.label}</p>
-              <p className="text-muted-foreground text-xs font-body">{diaper.sub}</p>
-              <p className="text-muted-foreground text-[10px] font-body mt-0.5">pannolino consigliato</p>
-            </div>
-          </div>
-
-          {/* BMI-style note */}
-          <div className="bg-mint/20 rounded-2xl p-3 text-center">
-            <p className="text-xs font-body text-muted-foreground leading-snug">
-              Rapporto peso/altezza
-            </p>
-            <p className="font-heading font-bold text-primary text-sm mt-0.5">
-              {(peso / (altezza / 100) ** 2).toFixed(1)} BMI bimbo
-            </p>
-          </div>
+      {/* Diaper suggestion – full width */}
+      <div className="bg-card rounded-3xl shadow-card p-4 flex items-center gap-4">
+        <div className="w-14 h-14 rounded-2xl bg-peach/30 flex items-center justify-center text-3xl flex-shrink-0">
+          {diaper.emoji}
         </div>
+        <div className="flex-1">
+          <p className="text-muted-foreground text-[10px] font-body">pannolino consigliato</p>
+          <p className="font-heading font-bold text-foreground text-lg leading-tight">{diaper.label}</p>
+          <p className="text-muted-foreground text-xs font-body">{diaper.sub}</p>
+        </div>
+      </div>
+
+      {/* BMI – full width */}
+      <div className="bg-mint/20 rounded-2xl p-4 flex items-center justify-between">
+        <p className="text-sm font-body text-muted-foreground">Rapporto peso/altezza</p>
+        <p className="font-heading font-bold text-primary text-lg">
+          {(peso / (altezza / 100) ** 2).toFixed(1)} <span className="text-xs font-body text-muted-foreground">BMI bimbo</span>
+        </p>
       </div>
 
       {/* Baby silhouette scale bar */}
