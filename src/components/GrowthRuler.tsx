@@ -127,15 +127,7 @@ export default function GrowthRuler() {
     <div className="flex flex-col gap-4">
       <div className="flex gap-4">
         {/* Ruler section */}
-        <div className="bg-card rounded-3xl shadow-card p-4 flex flex-col gap-3 flex-1">
-          <div className="flex items-center gap-2 mb-1">
-            <div className="w-8 h-8 rounded-xl bg-mint/40 flex items-center justify-center">
-              <Ruler size={16} className="text-primary" />
-            </div>
-            <p className="font-heading font-bold text-foreground text-sm">Altezza</p>
-          </div>
         <HeightDial value={altezza} onChange={setAltezza} />
-        </div>
 
         {/* Right col: weight + diaper */}
         <div className="flex flex-col gap-3 flex-1">
