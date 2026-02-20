@@ -1,110 +1,52 @@
-import { useState, useRef, useCallback } from "react";
+import { useState } from "react";
 import { Baby, Ruler, Weight } from "lucide-react";
+
+// ─── Height dial ─────────────────────────────────────────────────────────────
 
 const MIN_CM = 40;
 const MAX_CM = 120;
-const TICK_HEIGHT = 14; // px per cm
 
-interface GrowthRulerProps {
-  value: number;
-  onChange: (v: number) => void;
-  label?: string;
-}
+function HeightDial({ value, onChange }: { value: number; onChange: (v: number) => void }) {
+  const handleMinus = () => onChange(Math.max(MIN_CM, value - 1));
+  const handlePlus = () => onChange(Math.min(MAX_CM, value + 1));
 
-function VerticalRuler({ value, onChange, label = "cm" }: GrowthRulerProps) {
-  const rulerRef = useRef<HTMLDivElement>(null);
-  const isDragging = useRef(false);
-
-  const getValueFromY = (clientY: number) => {
-    const rect = rulerRef.current?.getBoundingClientRect();
-    if (!rect) return value;
-    const relY = rect.bottom - clientY;
-    const raw = Math.round(relY / TICK_HEIGHT) + MIN_CM;
-    return Math.max(MIN_CM, Math.min(MAX_CM, raw));
-  };
-
-  const handlePointerMove = useCallback((e: PointerEvent) => {
-    if (!isDragging.current) return;
-    onChange(getValueFromY(e.clientY));
-  }, []);
-
-  const handlePointerUp = useCallback(() => {
-    isDragging.current = false;
-    window.removeEventListener("pointermove", handlePointerMove);
-    window.removeEventListener("pointerup", handlePointerUp);
-  }, []);
-
-  const handlePointerDown = (e: React.PointerEvent) => {
-    isDragging.current = true;
-    onChange(getValueFromY(e.clientY));
-    window.addEventListener("pointermove", handlePointerMove);
-    window.addEventListener("pointerup", handlePointerUp);
-  };
-
-  const totalHeight = (MAX_CM - MIN_CM) * TICK_HEIGHT;
-  const markerBottom = (value - MIN_CM) * TICK_HEIGHT;
+  const pct = ((value - MIN_CM) / (MAX_CM - MIN_CM)) * 100;
 
   return (
-    <div className="flex items-end gap-2 select-none">
-      {/* Ruler track */}
-      <div
-        ref={rulerRef}
-        onPointerDown={handlePointerDown}
-        className="relative cursor-ns-resize touch-none"
-        style={{ height: totalHeight, width: 56 }}
-      >
-        {/* Background track */}
-        <div className="absolute inset-0 rounded-3xl bg-secondary overflow-hidden">
-          {/* Filled portion */}
-          <div
-            className="absolute bottom-0 left-0 right-0 rounded-3xl gradient-cta transition-all duration-75"
-            style={{ height: markerBottom }}
-          />
+    <div className="bg-card rounded-3xl shadow-card p-4 flex flex-col gap-3">
+      <div className="flex items-center gap-2">
+        <div className="w-8 h-8 rounded-xl bg-mint/40 flex items-center justify-center">
+          <Ruler size={16} className="text-primary" />
         </div>
-
-        {/* Tick marks */}
-        <div className="absolute inset-0 flex flex-col-reverse justify-start pointer-events-none">
-          {Array.from({ length: MAX_CM - MIN_CM + 1 }, (_, i) => i + MIN_CM).map((cm) => {
-            const isMajor = cm % 10 === 0;
-            const isMid = cm % 5 === 0;
-            return (
-              <div
-                key={cm}
-                className="absolute left-0 flex items-center"
-                style={{ bottom: (cm - MIN_CM) * TICK_HEIGHT - 1 }}
-              >
-                <div
-                  className={`bg-foreground/20 ${isMajor ? "h-0.5 w-7" : isMid ? "h-px w-4" : "h-px w-2"}`}
-                />
-                {isMajor && (
-                  <span className="ml-1.5 text-[9px] font-body text-muted-foreground font-semibold">{cm}</span>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Draggable handle */}
-        <div
-          className="absolute left-0 right-0 flex items-center justify-center pointer-events-none z-10"
-          style={{ bottom: markerBottom - 14, height: 28 }}
-        >
-          <div className="w-full h-7 rounded-xl bg-primary shadow-cta flex items-center justify-center gap-1">
-            <div className="flex gap-0.5">
-              {[0, 1, 2].map(i => (
-                <div key={i} className="w-0.5 h-3 rounded-full bg-primary-foreground/60" />
-              ))}
-            </div>
-          </div>
-        </div>
+        <p className="font-heading font-bold text-foreground text-sm">Altezza</p>
       </div>
 
-      {/* Value display */}
-      <div className="flex flex-col items-start gap-1">
-        <div className="bg-card rounded-2xl shadow-card px-4 py-3 min-w-[80px]">
-          <p className="text-3xl font-heading font-extrabold text-primary leading-none">{value}</p>
-          <p className="text-xs font-body text-muted-foreground mt-0.5">{label}</p>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handleMinus}
+          className="w-10 h-10 rounded-2xl bg-secondary font-heading font-bold text-foreground text-xl flex items-center justify-center active:scale-95 transition-transform"
+        >−</button>
+
+        <div className="flex-1 text-center">
+          <p className="text-4xl font-heading font-extrabold text-primary leading-none">{value}</p>
+          <p className="text-xs font-body text-muted-foreground">cm</p>
         </div>
+
+        <button
+          onClick={handlePlus}
+          className="w-10 h-10 rounded-2xl bg-primary text-primary-foreground font-heading font-bold text-xl flex items-center justify-center active:scale-95 transition-transform shadow-soft"
+        >+</button>
+      </div>
+
+      {/* Track */}
+      <div className="relative h-3 rounded-full bg-secondary overflow-hidden">
+        <div
+          className="h-full rounded-full gradient-cta transition-all duration-150"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+      <div className="flex justify-between text-[9px] font-body text-muted-foreground">
+        <span>{MIN_CM} cm</span><span>{MAX_CM} cm</span>
       </div>
     </div>
   );
@@ -192,10 +134,7 @@ export default function GrowthRuler() {
             </div>
             <p className="font-heading font-bold text-foreground text-sm">Altezza</p>
           </div>
-          <div className="flex justify-center">
-            <VerticalRuler value={altezza} onChange={setAltezza} />
-          </div>
-          <p className="text-center text-[10px] font-body text-muted-foreground">trascina per regolare</p>
+        <HeightDial value={altezza} onChange={setAltezza} />
         </div>
 
         {/* Right col: weight + diaper */}
