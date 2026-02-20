@@ -57,6 +57,15 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        peach: "hsl(var(--peach))",
+        mint: "hsl(var(--mint))",
+        lavender: "hsl(var(--lavender))",
+        sand: "hsl(var(--sand))",
+        cream: "hsl(var(--cream))",
+      },
+      fontFamily: {
+        heading: ['Nunito', 'system-ui', 'sans-serif'],
+        body: ['Nunito Sans', 'system-ui', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",
